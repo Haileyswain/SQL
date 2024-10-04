@@ -1,0 +1,30 @@
+SELECT* 
+FROM fortune_companies;
+ 
+--WHich employess have at least 10 weeks maternity leave and 20 days paid time off? 
+SELECT employees
+FROM fortune_companies
+WHERE maternity_leave_weeks>=10
+AND paid_time_off_days>=20;
+
+--WHich companies have an avg tenure of at least 5.0 or greater?
+SELECT company_name
+FROM fortune_companies
+GROUP BY company_name
+HAVING avg_employee_tenure>=5.0;
+
+-- What is the avg revenue of all the companies?
+SELECT AVG(revenue)
+FROM fortune_companies;
+
+--What is the max weeks a company will allow off for maternity leave?
+SELECT MAX(maternity_leave_weeks)
+FROM fortune_companies;
+
+--What companies offer healthcare?
+SELECT company_name,
+CASE
+ WHEN healthcare_benefits=1 THEN " Healthcare offered"
+ WHEN healthcare_benefits+0 THEN "Healthcare not offered"
+END as healthcare
+FROM fortune_companies;
