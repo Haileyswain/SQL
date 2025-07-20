@@ -65,3 +65,53 @@ SELECT Product, SUM(quantity)
 FROM BIT_DB.FebSales
 WHERE location like '%Los Angeles%'
 GROUP BY Product;
+SELECT *
+FROM Customers;
+
+-- How many orders were placed in February? 
+SELECT COUNT(orderid)
+FROM BIT_DB.FebSales
+WHERE length(orderid) = 6
+AND orderid <> 'OrderID';
+
+-- How many orders were placed in March? 
+SELECT COUNT(orderid)
+FROM BIT_DB.MarSales
+WHERE length(orderid) = 6
+AND orderid <> 'OrderID';
+
+-- How many of those orders were for an iPhone? 
+SELECT COUNT(orderid)
+FROM BIT_DB.MarSales
+WHERE Product = 'iPhone'
+AND length(orderid) = 6
+AND orderid <> 'OrderID';
+
+--What is the total revenue for each product sold in March?
+SELECT sum(quantity) * price AS revenue,
+product
+FROM BIT_DB.MarSales
+GROUP BY product;
+
+-- How many customers ordered more than 2 products at a time, and what was the average amount spent for those customers? 
+SELECT
+count(distinct cust.acctnum),
+avg(quantity*price)
+FROM BIT_DB.MarSales Mar
+LEFT JOIN BIT_DB.customers cust
+ON Mar.orderid=cust.order_id
+WHERE Mar.Quantity>2
+AND length(orderid) = 6
+AND orderid <> 'Order ID';
+
+SELECT * 
+FROM BIT_DB.FebSales;
+
+SELECT Product 
+FROM BIT_DB.FebSales 
+WHERE Quantity = 2; 
+
+SELECT Product, Price
+FROM BIT_DB.FebSales 
+WHERE Price > 150;
+
