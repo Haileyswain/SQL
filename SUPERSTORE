@@ -12,4 +12,3 @@ SELECT AVG(price),'Kitchen Supplies'
 FROM superstore
 GROUP BY 'Kitchen Supplies';
 
---How many cozy throw blankets are in stock?
